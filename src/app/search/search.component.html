@@ -1,1 +1,26 @@
-<p>{{data}}</p>
+<div class="form-container">
+    <form [formGroup]="searchForm">
+        <div>
+            <label for="search-term">Search term</label>
+            <input id="search-term" type="text" formControlName="searchTerm">
+            <div *ngIf="searchTerm.errors?.['required'] && (searchTerm.touched || searchTerm.dirty)">
+                Search term is required.
+            </div>
+            <div *ngIf="searchTerm.errors?.['maxlength'] && (searchTerm.touched || searchTerm.dirty)">
+                Search term must be no longer than {{this.maxCharacter}}.
+            </div>
+        </div>
+        <div>
+            <label for="url">URL</label>
+            <input id="url" type="text" formControlName="url">
+            <div *ngIf="url.errors?.['required'] && (url.touched || url.dirty)">
+                Url is required.
+            </div>
+            <div *ngIf="url.errors?.['pattern'] && (url.touched || url.dirty)">
+                Please enter a valid Url.
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="searchForm.invalid" (click)="onSearch()">Search</button>
+    </form>
+</div>
