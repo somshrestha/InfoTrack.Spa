@@ -50,8 +50,8 @@ export class SearchHistoryComponent implements OnInit {
     var datePickerInput = document.getElementById("datepicker") as HTMLInputElement;
     var selectedDate = datePickerInput.value;
     if (selectedDate !== "") {
-      var x = this.searchResultHistory.filter(srh => new Date(srh.searchDate).toISOString().split('T')[0] === selectedDate);
-      this.searchResultHistory = [...new Set(x)];
+      var filteredData = this.searchResultHistory.filter(srh => new Date(srh.searchDate).toISOString().split('T')[0] === selectedDate);
+      this.searchResultHistory = [...new Set(filteredData)];
     }
   }
 
