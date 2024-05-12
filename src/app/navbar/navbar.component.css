@@ -1,0 +1,53 @@
+ul, li {
+    list-style: none;
+    display: flex;
+    margin: 0px 0px 0px 10px;
+}
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+  }
+  
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer;
+}
+  
+/* Change the color of links on hover */
+.navbar a:hover,
+a[tabindex]:focus {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
+  background-color: #ddd;
+  color: white;
+}
+
+/* a {
+    display: block;
+    float: left;
+    padding: 10px 15px;
+    background-color:#aaa;
+    border: 1px solid #777;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    margin-right: 1px;
+    color:#fff;
+}
+
+a:hover,
+a:focus,
+a[tabindex]:focus,
+a.active {
+    background-color: #777;
+    color: black;
+} */

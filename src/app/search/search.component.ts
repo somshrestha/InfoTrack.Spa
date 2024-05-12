@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrls: ['../app.component.css']
 })
 export class SearchComponent {
+
   public searchResult: any;
-  public searchResultHistory: any;
+  // public searchResultHistory: any;
   public searchForm: any;
   public maxCharacter: number = 100;
 
@@ -30,7 +31,7 @@ export class SearchComponent {
       searchTerm: [null, [Validators.required, Validators.maxLength(this.maxCharacter)]]
     });
 
-    this.getSearchHistory();
+    // this.getSearchHistory();
   }
 
   public get url(): AbstractControl {
@@ -49,13 +50,13 @@ export class SearchComponent {
 
     this.searchService.getSearchResult(searchDto).subscribe((data) => {
       this.searchResult = data;
-      this.getSearchHistory();
+      //this.getSearchHistory();
     });
   }
 
-  public getSearchHistory(): void {
-    this.searchService.getAllSearchHistory().subscribe((data) => {
-      this.searchResultHistory = data;
-    });
-  }
+  // public getSearchHistory(): void {
+  //   this.searchService.getAllSearchHistory().subscribe((data) => {
+  //     this.searchResultHistory = data;
+  //   });
+  // }
 }

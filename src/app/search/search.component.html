@@ -44,24 +44,4 @@
 </ng-container>
 </div>
 
-<div>
-    <ng-container *ngIf="searchResultHistory">
-        <h5>Search Result History</h5>
-        <table >
-            <tbody>
-                <tr>
-                    <th>Url</th>
-                    <th>SearchtTerm</th>
-                    <th>Ranking</th>
-                    <th>Search Date</th>
-                </tr>
-                <tr *ngFor="let item of searchResultHistory">
-                    <td>{{item.url}}</td>
-                    <td>{{item.searchTerm}}</td>
-                    <td>{{item.ranking}}</td>
-                    <td>{{item.searchDate | date:'medium'}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </ng-container>
-    </div>
+
