@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-history',
@@ -10,8 +11,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['../app.component.css']
 })
 export class SearchHistoryComponent implements OnInit {
-
   public searchResultHistory: any;
+
+  private readonly subscriptions: Subscription[] = [];
 
   constructor(
     private readonly searchService: SearchService
@@ -22,8 +24,15 @@ export class SearchHistoryComponent implements OnInit {
   }
 
   public getSearchHistory(): void {
-    this.searchService.getAllSearchHistory().subscribe((data) => {
+    const searchHistorySubscription = this.searchService.getAllSearchHistory().subscribe((data) => {
       this.searchResultHistory = data;
+    });
+    this.subscriptions.push(searchHistorySubscription);
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
     });
   }
 }

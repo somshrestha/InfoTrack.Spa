@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
 import { SearchDto } from '../models/search-dto.model';
-import { SearchResultDto } from '../models/search-result-dto.model';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { urlRegex } from '../shared/regex-patterns';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -13,25 +13,23 @@ import { CommonModule } from '@angular/common';
   templateUrl: './search.component.html',
   styleUrls: ['../app.component.css']
 })
-export class SearchComponent {
-
+export class SearchComponent implements OnInit, OnDestroy {
   public searchResult: any;
-  // public searchResultHistory: any;
   public searchForm: any;
   public maxCharacter: number = 100;
+
+  private readonly subscriptions: Subscription[] = [];
 
   constructor(
     private readonly searchService: SearchService,
     private readonly formBuilder: FormBuilder
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
       url: [null, [Validators.required, Validators.pattern(urlRegex)]],
       searchTerm: [null, [Validators.required, Validators.maxLength(this.maxCharacter)]]
     });
-
-    // this.getSearchHistory();
   }
 
   public get url(): AbstractControl {
@@ -48,15 +46,16 @@ export class SearchComponent {
       searchTerm: this.searchTerm.value
     };
 
-    this.searchService.getSearchResult(searchDto).subscribe((data) => {
+    const searchResultSubscription = this.searchService.getSearchResult(searchDto).subscribe((data) => {
       this.searchResult = data;
-      //this.getSearchHistory();
     });
+
+    this.subscriptions.push(searchResultSubscription);
   }
 
-  // public getSearchHistory(): void {
-  //   this.searchService.getAllSearchHistory().subscribe((data) => {
-  //     this.searchResultHistory = data;
-  //   });
-  // }
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 }
