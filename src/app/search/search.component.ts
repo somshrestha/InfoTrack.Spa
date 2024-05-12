@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   public searchResult: any;
   public searchForm: any;
   public maxCharacter: number = 100;
+  public isLoading: boolean = false;
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -26,6 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.searchResult = [];
     this.searchForm = this.formBuilder.group({
       url: [null, [Validators.required, Validators.pattern(urlRegex)]],
       searchTerm: [null, [Validators.required, Validators.maxLength(this.maxCharacter)]]
@@ -41,6 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public onSearch(): void {
+    this.isLoading = true;
     const searchDto: SearchDto = {
       url: this.url.value,
       searchTerm: this.searchTerm.value
@@ -48,6 +51,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     const searchResultSubscription = this.searchService.getSearchResult(searchDto).subscribe((data) => {
       this.searchResult = data;
+      this.isLoading = false;
     });
 
     this.subscriptions.push(searchResultSubscription);

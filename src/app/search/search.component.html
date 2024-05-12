@@ -1,48 +1,58 @@
 <div class="form-container">
     <form [formGroup]="searchForm">
-        <div>
+        <div class="margin-right">
             <label for="search-term">Search term</label>
             <input id="search-term" type="text" formControlName="searchTerm">
-            <div *ngIf="searchTerm.errors?.['required'] && (searchTerm.touched || searchTerm.dirty)">
-                Search term is required.
-            </div>
-            <div *ngIf="searchTerm.errors?.['maxlength'] && (searchTerm.touched || searchTerm.dirty)">
-                Search term must be no longer than {{this.maxCharacter}}.
+            <div class="error-msg">
+                <div *ngIf="searchTerm.errors?.['required'] && (searchTerm.touched || searchTerm.dirty)">
+                    Search term is required.
+                </div>
+                <div *ngIf="searchTerm.errors?.['maxlength'] && (searchTerm.touched || searchTerm.dirty)">
+                    Search term must be no longer than {{this.maxCharacter}}.
+                </div>
             </div>
         </div>
-        <div>
+        <div class="margin-right">
             <label for="url">URL</label>
             <input id="url" type="text" formControlName="url">
-            <div *ngIf="url.errors?.['required'] && (url.touched || url.dirty)">
-                Url is required.
-            </div>
-            <div *ngIf="url.errors?.['pattern'] && (url.touched || url.dirty)">
-                Please enter a valid Url.
+            <div class="error-msg">
+                <div *ngIf="url.errors?.['required'] && (url.touched || url.dirty)">
+                    Url is required.
+                </div>
+                <div *ngIf="url.errors?.['pattern'] && (url.touched || url.dirty)">
+                    Please enter a valid Url.
+                </div>
             </div>
         </div>
 
         <button type="submit" [disabled]="searchForm.invalid" (click)="onSearch()">Search</button>
     </form>
 </div>
+        
+<div class="searching-spinner" *ngIf="isLoading">
+    Searching...
+</div>
 
 <div>
-<ng-container *ngIf="searchResult">
-    <h5>Search Result</h5>
-    <table >
-        <tbody>
-            <tr>
-                <th>Url</th>
-                <th>SearchtTerm</th>
-                <th>Ranking</th>
-            </tr>
-            <tr>
-                <td>{{searchResult.url}}</td>
-                <td>{{searchResult.searchTerm}}</td>
-                <td>{{searchResult.ranking}}</td>
-            </tr>
-        </tbody>
-    </table>
-</ng-container>
+    <ng-container *ngIf="searchResult">
+        <h2>Search Result</h2>
+        <table class="table-class">
+            <thead>
+                <tr>
+                    <th>Url</th>
+                    <th>Search Term</th>
+                    <th>Ranking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{searchResult.url}}</td>
+                    <td>{{searchResult.searchTerm}}</td>
+                    <td>{{searchResult.ranking}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </div>
 
 
