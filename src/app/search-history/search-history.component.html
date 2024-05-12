@@ -1,16 +1,27 @@
 <div>
+    <div class="datepicker">
+        <label for="date">Filter by date:</label>
+        <input type="date" id="datepicker">
+        <button id="submitBtn" (click)="filterByDate()">Filter</button>
+        <button id="submitBtn" (click)="resetData()">Reset Table</button>
+    </div>
+</div>
+<div>
     <ng-container *ngIf="searchResultHistory">
         <h2>Search Result History</h2>
         <table class="table-class">
             <thead>
                 <tr>
                     <th>Url</th>
-                    <th>SearchtTerm</th>
+                    <th>Search Term</th>
                     <th>Ranking</th>
                     <th>Search Date</th>
                 </tr>
             </thead>
             <tbody>
+                <tr class="error-msg" *ngIf="searchResultHistory.length === 0">
+                    No data found
+                </tr>
                 <tr *ngFor="let item of searchResultHistory">
                     <td>{{item.url}}</td>
                     <td>{{item.searchTerm}}</td>
