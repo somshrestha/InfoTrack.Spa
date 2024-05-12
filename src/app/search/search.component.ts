@@ -14,7 +14,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  public data: any;
+  public searchResult: any;
+  public searchResultHistory: any;
   public searchForm: any;
   public maxCharacter: number = 100;
 
@@ -28,6 +29,8 @@ export class SearchComponent {
       url: [null, [Validators.required, Validators.pattern(urlRegex)]],
       searchTerm: [null, [Validators.required, Validators.maxLength(this.maxCharacter)]]
     });
+
+    this.getSearchHistory();
   }
 
   public get url(): AbstractControl {
@@ -45,7 +48,14 @@ export class SearchComponent {
     };
 
     this.searchService.getSearchResult(searchDto).subscribe((data) => {
-      this.data = data;
+      this.searchResult = data;
+      this.getSearchHistory();
+    });
+  }
+
+  public getSearchHistory(): void {
+    this.searchService.getAllSearchHistory().subscribe((data) => {
+      this.searchResultHistory = data;
     });
   }
 }

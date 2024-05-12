@@ -1,3 +1,8 @@
 .form-container {
-    display: flex;
+    display: table-caption;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }

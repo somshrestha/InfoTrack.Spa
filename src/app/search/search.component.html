@@ -24,3 +24,44 @@
         <button type="submit" [disabled]="searchForm.invalid" (click)="onSearch()">Search</button>
     </form>
 </div>
+<div>
+<ng-container *ngIf="searchResult">
+    <h5>Search Result</h5>
+    <table >
+        <tbody>
+            <tr>
+                <th>Url</th>
+                <th>SearchtTerm</th>
+                <th>Ranking</th>
+            </tr>
+            <tr>
+                <td>{{searchResult.url}}</td>
+                <td>{{searchResult.searchTerm}}</td>
+                <td>{{searchResult.ranking}}</td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+</div>
+
+<div>
+    <ng-container *ngIf="searchResultHistory">
+        <h5>Search Result History</h5>
+        <table >
+            <tbody>
+                <tr>
+                    <th>Url</th>
+                    <th>SearchtTerm</th>
+                    <th>Ranking</th>
+                    <th>Search Date</th>
+                </tr>
+                <tr *ngFor="let item of searchResultHistory">
+                    <td>{{item.url}}</td>
+                    <td>{{item.searchTerm}}</td>
+                    <td>{{item.ranking}}</td>
+                    <td>{{item.searchDate | date:'medium'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+    </div>
