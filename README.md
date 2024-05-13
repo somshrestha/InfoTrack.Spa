@@ -1,27 +1,31 @@
-# InfoTrackSpa
+# Project Setup
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+## SPA
 
-## Development server
+- Make sure you have Node.js and npm are installed
+- Open InfoTrack.Spa in Visual Studio code or similar
+- Run “npm install”
+- Run “ng serve” to start the application
+- Go to any browser (Chrome preferred) http://localhost:4200/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Some screenshots of the solution
 
-## Code scaffolding
+- ![image](https://github.com/somshrestha/InfoTrack.Spa/assets/16788255/98e115e7-9ea6-4a6d-8616-46afa3fd205d)
+- There is a **Search term and URL** where you can search for the result that you want. When pressed **Search button**, it will give back the result populated on the table below.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- ![image](https://github.com/somshrestha/InfoTrack.Spa/assets/16788255/0a0df54d-d149-45ec-b227-3674b2c87e74)
+- Just a snippet of how the result is shown on the table below.
 
-## Build
+- ![image](https://github.com/somshrestha/InfoTrack.Spa/assets/16788255/fd6f8a09-38fa-4fff-be5f-5ebd9897cb6a)
+- So, this is the result history page where there are 2 buttons.It is ordered by recent data. **Filter button** can be used to filter the table by date entered on **Filter by date input datepicker**. And the table can be reset by clicking on the **Reset Table button**.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Improvements
 
-## Running unit tests
+- Authentication on the system
+- Using Cryptography encryption for the ids to make it encrypted on the UI so that the system will not be vulnerable against SQL injection.
+- Pagination functionality on Search History table so that it does not affect performance issues
+- Sorting functionalities on the table
+- More test cases and integration tests
+- Add logs to the system
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
